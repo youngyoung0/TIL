@@ -14,6 +14,7 @@ public class Member {
     @GeneratedValue
     @Column(name = "member_id")
     private Long id;
+
     private String username;
     private int age;
 
@@ -32,6 +33,11 @@ public class Member {
         if(team!=null){
             changeTeam(team);
         }
+    }
+
+    public Member(String username, int age) {
+        this.username = username;
+        this.age = age;
     }
 
     public void changeTeam(Team team){
