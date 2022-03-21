@@ -28,6 +28,9 @@ dependencies {
     implementation ("mysql:mysql-connector-java:8.0.22")
     runtimeOnly("mysql:mysql-connector-java")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly("org.projectlombok:lombok:1.18.20")
+
 
     kapt( group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
 
