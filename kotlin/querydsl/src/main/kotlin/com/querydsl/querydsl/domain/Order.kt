@@ -1,33 +1,24 @@
 package com.querydsl.querydsl.domain
 
-import lombok.Getter
-import lombok.Setter
-import java.time.LocalDateTime
+import java.math.BigDecimal
 import javax.persistence.*
 
 @Entity
-@Getter
-@Setter
-@Table(name="orders")
-class Order (){
-    @Id @GeneratedValue
-    @Column(name="order_id")
-    var id: Long?=null
+@Table(name = "orders")
+data class Order(
+    @Column(name = "amount", nullable = false)
+    var amount: BigDecimal,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="member_id")
-    var member: Member?=null
+    @Embedded
+    var orderer: Orderer
 
-    @OneToMany(mappedBy = "order")
-    var orderItems: List<OrderItem>  ?=null
+) : EntityAuditing()
 
-    @OneToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "delivery_id")
-    var delivery:Delivery?=null // 배송정보
+@Embeddable
+data class Orderer(
+    @Column(name = "member_id", nullable = false, updatable = false)
+    var memberId: Long,
 
-    var orderDate: LocalDateTime?=null // 주문시간
-
-    @Enumerated(EnumType.STRING)
-    lateinit var status: OrderStatus; // 주문상태 [ORDER , CANCEL]
-}
-
+    @Column(name = "email", nullable = false, updatable = false)
+    var email: String
+)
