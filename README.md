@@ -4,3 +4,4 @@
 
 - JPA
 - Kotlin
+- Java
