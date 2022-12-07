@@ -13,5 +13,10 @@ public class FPNumberRunner2 {
 
         // print the length of each element
         List.of("Apple", "Ant", "Bat").stream().map(e -> e.length()).forEach(e -> System.out.println(e));
+
+        System.out.println(IntStream.range(1,11).reduce(0, (n1, n2) -> n1 + n2 ));
+
+        // max
+        System.out.println(List.of(23,12,34,53).stream().max((n1, n2 )-> Integer.compare(n1, n2)).get());
     }
 }
