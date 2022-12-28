@@ -19,7 +19,7 @@ public class AllSum4 {
             int secondIndex = sc.nextInt();
             System.out.println(arr[secondIndex] - arr[firstIndex-1]);
         }
-
+        sc.close();
 
     }
 }
