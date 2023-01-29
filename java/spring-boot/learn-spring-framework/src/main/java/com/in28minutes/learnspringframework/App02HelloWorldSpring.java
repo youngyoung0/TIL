@@ -14,5 +14,8 @@ public class App02HelloWorldSpring {
 
         // 3. 스프링이 관리하는 Bean 회수
         System.out.println(context.getBean("name"));
+        System.out.println(context.getBean("age"));
+        System.out.println(context.getBean("person"));
+        System.out.println(context.getBean("address"));
     }
 }
