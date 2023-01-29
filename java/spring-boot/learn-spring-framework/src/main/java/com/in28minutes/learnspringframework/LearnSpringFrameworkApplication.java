@@ -13,9 +13,8 @@ public class LearnSpringFrameworkApplication {
 	public static void main(String[] args) {
 //		var game = new MarioGame();
 //		var game = new SuperContraGame();
-		var game = new PacmanGame();
-		var gameRunner = new GameRunner(game);
-
+		var game = new PacmanGame(); // 1. 객체 생성
+		var gameRunner = new GameRunner(game); // 2. 객체 생성 + 종속성 작수
 
 		gameRunner.run();
 	}
