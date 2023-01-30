@@ -1,4 +1,4 @@
-package com.in28minutes.learnspringframework;
+package com.in28minutes.learnspringframework.helloworld;
 
 import com.in28minutes.learnspringframework.entity.Address;
 import com.in28minutes.learnspringframework.entity.Person;
