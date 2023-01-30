@@ -1,6 +1,7 @@
 package com.in28minutes.learnspringframework;
 
 import com.in28minutes.learnspringframework.entity.Address;
+import com.in28minutes.learnspringframework.entity.Person;
 import com.in28minutes.learnspringframework.game.GameRunner;
 import com.in28minutes.learnspringframework.game.PacmanGame;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -21,7 +22,9 @@ public class App02HelloWorldSpring {
         System.out.println(context.getBean("person2MethodCall"));
         System.out.println(context.getBean("Person3Parameters"));
         System.out.println(context.getBean("address2"));
-//        System.out.println(context.getBean(Address.class));
+        System.out.println(context.getBean(Person.class));
+        System.out.println(context.getBean(Address.class));
+        System.out.println(context.getBean("Person5QualifierString"));
 
         /* 1. 빈에 대한 사용자 지정 이름을 구성할 수 있다는 사실
         *  2. 스프링 컨텍스트에서 빈을 여러번 검색할 수 있다는 사실
