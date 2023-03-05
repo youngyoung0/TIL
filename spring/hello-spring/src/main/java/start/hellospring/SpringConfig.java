@@ -3,6 +3,7 @@ package start.hellospring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import start.hellospring.aop.TimeTraceApp;
 import start.hellospring.repository.MemberRepository;
 import start.hellospring.service.MemberService;
 
@@ -22,4 +23,8 @@ public class SpringConfig {
         return new MemberService(memberRepository);
     }
 
+    @Bean
+    public TimeTraceApp timeTraceApp(){
+        return new TimeTraceApp();
+    }
 }
