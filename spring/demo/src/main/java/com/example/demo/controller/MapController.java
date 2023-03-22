@@ -15,7 +15,7 @@ public class MapController {
 
     private final MapConfig mapConfig;
 
-    @GetMapping("")
+    @GetMapping("config")
     public ResponseEntity<String> mapConfig(){
         System.out.println(mapConfig);
         return new ResponseEntity<>("mapConfig", HttpStatus.OK);
