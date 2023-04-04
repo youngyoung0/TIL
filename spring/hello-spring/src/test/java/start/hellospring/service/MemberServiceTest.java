@@ -6,6 +6,14 @@ import org.junit.jupiter.api.Test;
 import start.hellospring.domain.Member;
 import start.hellospring.repository.MemoryMemberRepository;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Stack;
+import java.util.function.IntPredicate;
+import java.util.stream.IntStream;
+
 import static org.assertj.core.api.Assertions.*;
 
 class MemberServiceTest {
@@ -71,5 +79,37 @@ class MemberServiceTest {
 
     @Test
     void findOne() {
+    }
+
+    @Test
+    void solution(){
+       int[] sides = {1,3,3};
+       int answer = 0;
+       int sum = 0;
+       int max = Arrays.stream(sides).max().getAsInt();
+        System.out.println(IntStream.range(0, sides.length)
+                .filter(i -> max == sides[i])
+                .findFirst().getAsInt());
+       sides [IntStream.range(0, sides.length)
+                       .filter(i -> max == sides[i])
+                               .findFirst().getAsInt()] = 0;
+
+//       sides[Arrays.asList(sides).indexOf(max)]  = 0;
+
+       for(int side : sides){
+           if(side != max){
+               sum += side;
+           }
+       }
+        System.out.println(max);
+        System.out.println(sum);
+       if(max >= sum){
+           answer = 2;
+       }else{
+           answer = 1;
+       }
+
+        System.out.println(answer);
+
     }
 }
