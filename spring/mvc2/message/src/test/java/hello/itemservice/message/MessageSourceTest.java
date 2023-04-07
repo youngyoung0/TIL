@@ -18,37 +18,39 @@ public class MessageSourceTest {
     MessageSource ms;
 
     @Test
-    void helloMessage() {
+    void HelloMessage() {
         String result = ms.getMessage("hello", null, null);
-        assertThat(result).isEqualTo("안녕");
+        System.out.println(result);
+        Assertions.assertThat(result).isEqualTo("안녕");
     }
 
     @Test
-    void notFoundMessageCode() {
-        assertThatThrownBy(() -> ms.getMessage("no_code", null, null))
+    void notFountdMessageCode() {
+        Assertions.assertThatThrownBy(() -> ms.getMessage("no_code", null, null))
                 .isInstanceOf(NoSuchMessageException.class);
     }
 
     @Test
-    void notFoundMessageCodeDefaultMessage() {
-        String result = ms.getMessage("no_code", null, "기본 메시지", null);
-        assertThat(result).isEqualTo("기본 메시지");
+    void notFountdMessageCodeDefaultMessage() {
+        String result = ms.getMessage("no_code", null, "기본 메세지", null);
+        Assertions.assertThat(result).isEqualTo("기본 메세지");
     }
 
     @Test
     void argumentMessage() {
-        String message = ms.getMessage("hello.name", new Object[]{"Spring"}, null);
-        assertThat(message).isEqualTo("안녕 Spring");
+        String result = ms.getMessage("hello.name", new Object[]{"Spring"}, null);
+        Assertions.assertThat(result).isEqualTo("안녕 Spring");
     }
 
     @Test
     void defaultLang() {
-        assertThat(ms.getMessage("hello", null, null)).isEqualTo("안녕");
-        assertThat(ms.getMessage("hello", null, Locale.KOREA)).isEqualTo("안녕");
+        Assertions.assertThat(ms.getMessage("hello", null, null)).isEqualTo("안녕");
+        Assertions.assertThat(ms.getMessage("hello", null, Locale.KOREA)).isEqualTo("안녕");
     }
 
     @Test
-    void enLang() {
-        assertThat(ms.getMessage("hello", null, Locale.ENGLISH)).isEqualTo("hello");
+    void enLang(){
+        Assertions.assertThat(ms.getMessage("hello", null, Locale.ENGLISH)).isEqualTo("hello");
     }
+
 }
