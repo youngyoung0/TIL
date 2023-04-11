@@ -11,18 +11,18 @@ import javax.validation.constraints.NotNull;
 @Data
 //@ScriptAssert(lang = "javascript", script = "_this.price * _this.quantity >= 총합이 10000 넘게 입력해주세요.")
 public class Item {
-    @NotNull // 수정할때는 아이디가 있지만 추가할때는 아이디가 없어서 등록이 안되는 이슈 발생
+    @NotNull(groups = UpdateCheck.class) // 수정 요구사항 추가
     private Long id;
 
-    @NotBlank(message = "공백X")
+    @NotBlank(groups = {SaveCheck.class, UpdateCheck.class})
     private String itemName;
 
-    @NotNull
-    @Range(min=1000, max=100000)
+    @NotBlank(groups = {SaveCheck.class, UpdateCheck.class})
+    @Range(min=1000, max=100000, groups = {SaveCheck.class, UpdateCheck.class})
     private Integer price;
 
-    @NotNull
-//    @Max(9999) // 수정 요구사항 추가
+    @NotNull(groups = {SaveCheck.class, UpdateCheck.class})
+    @Max(value = 9999, groups = SaveCheck.class) // 수정 요구사항 추가
     private Integer quantity;
 
     public Item() {
