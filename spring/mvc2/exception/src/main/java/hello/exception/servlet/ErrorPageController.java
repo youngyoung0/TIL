@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class ErrorPageController {
 
-    @RequestMapping("error-page/400")
+    @RequestMapping("error-page/404")
     public String errorPage404(HttpServletRequest request, HttpServletResponse response){
         log.info("errorPage 404");
         return "error-page/404";
