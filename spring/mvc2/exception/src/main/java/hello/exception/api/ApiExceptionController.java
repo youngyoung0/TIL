@@ -18,6 +18,9 @@ public class ApiExceptionController {
         if(id.equals("bad")){
             throw new IllegalArgumentException("잘못된 입력값");
         }
+        if(id.equals("user-ex")){
+            throw new RuntimeException("사용자 오류");
+        }
         return new MemberDto(id, "hello " + id);
     }
 
