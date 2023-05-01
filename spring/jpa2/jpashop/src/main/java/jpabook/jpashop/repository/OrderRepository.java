@@ -1,18 +1,13 @@
 package jpabook.jpashop.repository;
 
-import jpabook.jpashop.api.OrderSimpleApiController;
-import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Order;
 
-import jpabook.jpashop.domain.OrderStatus;
-import lombok.Data;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,6 +104,17 @@ public class OrderRepository {
         ).getResultList();
     }
 
+    public List<Order> findAllWithItem(){
+        return em.createQuery(
+                "select distinct o from Order o " +
+                        "join fetch o.member m " +
+                        "join fetch o.delivery d " +
+                        "join fetch o.orderItems oi " +
+                        "join fetch oi.item i ", Order.class)
+                .setFirstResult(1)
+                .setMaxResults(100)
+                .getResultList();
+    }
 }
 
 
