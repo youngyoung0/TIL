@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import sample.cafekiosk.unit.beverages.Americano;
 import sample.cafekiosk.unit.beverages.Latte;
+import sample.cafekiosk.unit.order.Order;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -76,5 +77,18 @@ class CafeKioskTest {
 
         cafeKiosk.clear();
         assertThat(cafeKiosk.getBeverages()).isEmpty();
+    }
+
+    @Test
+    void createOrder(){
+        CafeKiosk cafeKiosk = new CafeKiosk();
+        Americano americano = new Americano();
+
+        cafeKiosk.add(americano);
+
+        Order order = cafeKiosk.createOrder();
+
+        assertThat(order.getBeverages()).hasSize(1);
+        assertThat(order.getBeverages().get(0).getName()).isEqualTo("아메리카노");
     }
 }
