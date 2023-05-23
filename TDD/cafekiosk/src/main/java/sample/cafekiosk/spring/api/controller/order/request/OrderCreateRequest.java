@@ -1,17 +1,17 @@
 package sample.cafekiosk.spring.api.controller.order.request;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.List;
 
-@Getter
+@Data
+@NoArgsConstructor
 public class OrderCreateRequest {
 
     private List<String> productNumbers;
 
     @Builder
-    public OrderCreateRequest(List<String> productNumbers) {
+    private OrderCreateRequest(List<String> productNumbers) {
         this.productNumbers = productNumbers;
     }
 }
