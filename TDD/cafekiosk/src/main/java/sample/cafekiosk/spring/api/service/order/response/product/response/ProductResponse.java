@@ -1,7 +1,6 @@
-package sample.cafekiosk.spring.api.service.product.response;
+package sample.cafekiosk.spring.api.service.order.response.product.response;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import sample.cafekiosk.spring.domain.product.Product;
