@@ -3,6 +3,7 @@ package sample.cafekiosk.spring.api.service.order.request;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import sample.cafekiosk.spring.domain.order.Order;
 
 import java.util.List;
 
