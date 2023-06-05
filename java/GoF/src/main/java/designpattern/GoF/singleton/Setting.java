@@ -18,24 +18,24 @@ public class Setting {
     }
 
 
-    // double chcked locking 사용하기
-    private static volatile Setting instace;
-    public static Setting getInstance(){
-        if(instace == null){
-            synchronized (Setting.class){
-                if(instace == null){
-                    instace = new Setting();
-                }
-            }
-        }
-    }
-
-    private static class SettingHolder{
-        private static final Setting instance = new Setting();
-    }
-
-    // static inner 클래스 사용하기
-    public static Setting getInstance(){
-        return SettingHolder.instance;
-    }
+//    // double chcked locking 사용하기
+//    private static volatile Setting instace;
+//    public static Setting getInstance(){
+//        if(instace == null){
+//            synchronized (Setting.class){
+//                if(instace == null){
+//                    instace = new Setting();
+//                }
+//            }
+//        }
+//    }
+//
+//    private static class SettingHolder{
+//        private static final Setting instance = new Setting();
+//    }
+//
+//    // static inner 클래스 사용하기
+//    public static Setting getInstance(){
+//        return SettingHolder.instance;
+//    }
 }
