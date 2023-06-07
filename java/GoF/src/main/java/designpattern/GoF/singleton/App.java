@@ -26,5 +26,15 @@ public class App {
         }
 
         System.out.println(settings == settings1);
+
+        // enum 으로 사용
+        // - 리플랙션에 안전한 코드가 됩니다.
+        SettingE settingE = SettingE.INSTANCE;
+
+        Constructor<SettingE> constructorE = SettingE.class.getDeclaredConstructor();
+        constructorE.setAccessible(true);
+        SettingE settingE1 = constructorE.newInstance();
+        System.out.println(settingE == settingE1);
+
     }
 }
