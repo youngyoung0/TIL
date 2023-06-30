@@ -14,8 +14,8 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-    @Transactional
-    public void decrease(Long id, Long quantity){
+//    @Transactional
+    public synchronized void decrease(Long id, Long quantity){
         // get stock
         // 재고 감소
         // 저장
@@ -25,5 +25,11 @@ public class StockService {
         stock.decrease(quantity);
 
         stockRepository.saveAndFlush(stock);
+
+        /**
+         * synchronized와 @Transactional 같이 사용하면 문제점
+         * Synchronized를 사용하는 이유는 해당 메서드를 한 쓰레드에서만 돌리기 위해서 이다.
+         * 하지만, 트랜잭션이 같이 정의가 되어있다면 첫 번째 쓰레드가 끝나기 전 두 번째 쓰레드가 발동할 수도 있다.
+         */
     }
 }
