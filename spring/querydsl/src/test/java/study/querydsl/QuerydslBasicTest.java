@@ -350,4 +350,57 @@ public class QuerydslBasicTest {
                 .containsExactly(40);
     }
 
+    @Test
+    public void subQueryGoe() throws Exception{
+        QMember memberSub = new QMember("memberSub");
+
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .where(member.age.goe(
+                        JPAExpressions
+                                .select(memberSub.age.avg())
+                                .from(memberSub)
+                ))
+                .fetch();
+
+        assertThat(result).extracting("age")
+                .containsExactly(30, 40);
+    }
+
+    @Test
+    public void subQueryIn() throws Exception{
+        QMember memberSub = new QMember("memberSub");
+
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .where(member.age.in(
+                        JPAExpressions
+                                .select(memberSub.age)
+                                .from(memberSub)
+                                .where(memberSub.age.gt(10))
+                ))
+                .fetch();
+
+        assertThat(result).extracting("age")
+                .containsExactly(20, 30, 40);
+
+        /**
+         * lt : <
+         * loe : <=
+         * gt : >
+         * goe : >=
+         */
+    }
+    /**
+     * from 절의 서브쿼리 한계
+     * JPA JPQL 서브쿼리의 한계점으로 from절의 서브쿼리(인라인 뷰)는 지원하지 않는다.
+     * 하이버네이트 구현체를 사용하면 select절의 서브쿼리는 지원한다.
+     * Querydsl도 하이버네이트 구현체를 사용하면 select절의 서브쿼리를 지웒낟,
+     *
+     * from 절의 서브쿼리 해결방안
+     * 서브쿼리를 join으로 변경한다.
+     * 애플리케이션에서 쿼리를 2버누 분리해서 실행한다.
+     * nativeSQL을 사용한다.
+     */
+
 }
