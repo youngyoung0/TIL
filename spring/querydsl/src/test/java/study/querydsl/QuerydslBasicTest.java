@@ -1,11 +1,14 @@
 package study.querydsl;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import jdk.jshell.spi.ExecutionControlProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -485,5 +488,60 @@ public class QuerydslBasicTest {
                 .select(member.username).distinct()
                 .from(member)
                 .fetch();
+    }
+
+    /**
+    * 동적 쿼리 BooleanBuilder
+    */
+    @Test
+    public void booleanBuilder() throws Exception{
+        String usernameParam = "member1";
+        Integer ageParam = 10;
+
+        List<Member> result = searchMember1(usernameParam, ageParam);
+        assertThat(result);
+    }
+
+    private List<Member> searchMember1(String usernameCond, Integer ageCond){
+        BooleanBuilder builder = new BooleanBuilder();
+        if(usernameCond != null){
+            builder.and(member.username.eq(usernameCond));
+        }
+        if(ageCond != null){
+            builder.and(member.age.eq(ageCond));
+        }
+        return queryFactory
+                .selectFrom(member)
+                .where(builder)
+                .fetch();
+    }
+
+    @Test
+    public void whereParam() throws Exception{
+        String username = "member1";
+        Integer ageParam = 10;
+
+        List<Member> result = searchMember2(username, ageParam);
+        assertThat(result.size()).isEqualTo(1);
+    }
+
+    private List<Member> searchMember2(String username, Integer ageParam){
+        return queryFactory
+                .selectFrom(member)
+                .where(usernameEq(username), ageEq(ageParam))
+                .fetch();
+        /**
+         * where 조건에 null값은 무시됩니다.
+         * 메서드 다른 쿼리에서도 재활용 할 수 있다.
+         * 쿼리 자체의 가독성을 높아진다.
+         */
+    }
+
+    private BooleanExpression usernameEq(String usernameCond){
+        return usernameCond != null ? member.username.eq(usernameCond) :  null;
+    }
+
+    private BooleanExpression ageEq(Integer ageCond){
+        return ageCond != null ? member.age.eq(ageCond) : null;
     }
 }
