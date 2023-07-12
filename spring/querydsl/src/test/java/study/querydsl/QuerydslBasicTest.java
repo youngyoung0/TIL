@@ -6,6 +6,7 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jdk.jshell.spi.ExecutionControlProvider;
@@ -576,5 +577,16 @@ public class QuerydslBasicTest {
                 .delete(member)
                 .where(member.age.gt(10))
                 .execute();
+    }
+
+    @Test
+    public void sqlFunction(){
+        String result = queryFactory
+                .select(Expressions.stringTemplate("functional('replace', {0}, {1}, {2})", member.username, "member", "M"))
+                .from(member)
+                .fetchFirst();
+        /**
+         * member -> M 으로 변경하는 replace 함수 사용
+         */
     }
 }
