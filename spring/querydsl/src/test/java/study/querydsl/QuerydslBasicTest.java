@@ -544,4 +544,11 @@ public class QuerydslBasicTest {
     private BooleanExpression ageEq(Integer ageCond){
         return ageCond != null ? member.age.eq(ageCond) : null;
     }
+
+    /**
+     * usernameEq, ageEq 두개를 조합이 가능합니다.
+     */
+    private BooleanExpression allEq(String usernameCond, Integer ageCond){
+        return usernameEq(usernameCond).and(ageEq(ageCond));
+    }
 }
