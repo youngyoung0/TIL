@@ -23,7 +23,8 @@ class QuerydslApplicationTests {
 		Hello hello = new Hello();
 		em.persist(hello);
 
-		JPAQueryFactory query = new JPAQueryFactory(em); QHello qHello = QHello.hello; //Querydsl Q타입 동작 확인
+		JPAQueryFactory query = new JPAQueryFactory(em);
+		QHello qHello = QHello.hello; //Querydsl Q타입 동작 확인
 		Hello result = query
 				.selectFrom(qHello)
 				.fetchOne();
@@ -31,5 +32,4 @@ class QuerydslApplicationTests {
 		Assertions.assertThat(result).isEqualTo(hello);
 		Assertions.assertThat(result.getId()).isEqualTo(hello.getId());
 	}
-
 }
