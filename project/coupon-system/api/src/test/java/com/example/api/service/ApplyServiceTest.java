@@ -21,6 +21,8 @@ class ApplyServiceTest {
     @Autowired
     private CouponRepository couponRepository;
 
+
+
     @Test
     public void 한번만응모() {
         applyService.apply(1L);
@@ -52,8 +54,6 @@ class ApplyServiceTest {
         long count = couponRepository.count();
 
         assertThat(count).isEqualTo(100);
-        // 레이스 컨디션
-        // 두개 이상의 스레드가 공유 데이터에 엑세스로 하고 동시에 작업을 할때 발생하는 이슈
     }
 
 }
