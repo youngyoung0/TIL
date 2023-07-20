@@ -22,7 +22,7 @@ public class ApplyService {
     public void apply(Long userId){
         // redis incr key:value 싱글 스레드 기반으로 동작
         Long count = couponCountRepository.increment();
-        System.out.println(count);
+
         if(count > 100){
             return;
         }
