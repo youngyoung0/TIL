@@ -1,6 +1,7 @@
 package com.example.api.service;
 
 import com.example.api.producer.CouponCreateProducer;
+import com.example.api.repository.ApplieUserRepository;
 import com.example.api.repository.CouponCountRepository;
 import com.example.api.repository.CouponRepository;
 import org.springframework.stereotype.Service;
@@ -13,19 +14,30 @@ public class ApplyService {
 
     private final CouponCreateProducer couponCreateProducer;
 
-    public ApplyService(CouponRepository couponRepository, CouponCountRepository couponCountRepository, CouponCreateProducer couponCreateProducer){
+    private final ApplieUserRepository applieUserRepository;
+
+    public ApplyService(CouponRepository couponRepository, CouponCountRepository couponCountRepository, CouponCreateProducer couponCreateProducer, ApplieUserRepository applieUserRepository) {
         this.couponRepository = couponRepository;
         this.couponCountRepository = couponCountRepository;
         this.couponCreateProducer = couponCreateProducer;
+        this.applieUserRepository = applieUserRepository;
     }
 
-    public void apply(Long userId){
+    public void apply(Long userId) {
+        Long apply = applieUserRepository.add(userId);
+
+        if(apply != 1){
+            return;
+        }
+
         // redis incr key:value 싱글 스레드 기반으로 동작
         Long count = couponCountRepository.increment();
 
-        if(count > 100){
+        if (count > 100) {
             return;
         }
+
+
         couponCreateProducer.create(userId); // 토픽에 유저아이디를 전송
         /**
          * 싱글 스레드로 작업을 진행하게 된다면 레이스 컨디션이 발생하지 않습니다.
