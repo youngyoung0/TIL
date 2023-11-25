@@ -5,6 +5,8 @@ import com.study.mongo.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/student")
 @RequiredArgsConstructor
@@ -19,5 +21,10 @@ public class StudentController {
     @GetMapping("/get/{id}")
     public Student getStudentById(@PathVariable String id){
         return studentService.getStudentById(id);
+    }
+
+    @GetMapping("/get/all")
+    public List<Student> getStudentByAll(){
+        return studentService.getStudentByAll();
     }
 }
