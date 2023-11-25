@@ -2,8 +2,10 @@ package com.study.mongo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
+@EnableMongoRepositories("com.study.mongo.repository")
 public class MongoApplication {
 
 	public static void main(String[] args) {
