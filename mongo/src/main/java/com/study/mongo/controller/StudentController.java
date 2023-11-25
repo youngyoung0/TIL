@@ -27,4 +27,9 @@ public class StudentController {
     public List<Student> getStudentByAll(){
         return studentService.getStudentByAll();
     }
+
+    @PutMapping("/update")
+    public Student updateStudent(@RequestBody Student student){
+        return studentService.updateStudent(student);
+    }
 }
