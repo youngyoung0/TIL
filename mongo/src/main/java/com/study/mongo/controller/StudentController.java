@@ -16,4 +16,8 @@ public class StudentController {
         return studentService.StudentController(student);
     }
 
+    @GetMapping("/get/{id}")
+    public Student getStudentById(@PathVariable String id){
+        return studentService.getStudentById(id);
+    }
 }

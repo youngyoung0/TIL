@@ -14,4 +14,9 @@ public class StudentService {
     public Student StudentController(Student student) {
         return studentRepository.save(student);
     }
+
+    public Student getStudentById(String id) {
+        return studentRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("존재하지 않는 학생입니다."));
+    }
 }
