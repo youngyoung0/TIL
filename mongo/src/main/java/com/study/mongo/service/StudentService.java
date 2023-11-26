@@ -67,4 +67,8 @@ public class StudentService {
         }
         throw new RuntimeException("존재하지 않는 정렬 방식입니다.");
     }
+
+    public List<Student> byDepartmentName(String deptName) {
+        return studentRepository.findByDepartmentDepartmentName(deptName);
+    }
 }
