@@ -3,6 +3,7 @@ package com.study.mongo.controller;
 import com.study.mongo.entity.Student;
 import com.study.mongo.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,5 +52,10 @@ public class StudentController {
     @GetMapping("/get/studentByNameOrMail")
     public List<Student> getStudentByNameOrMail(@RequestParam String name, @RequestParam String email){
         return studentService.getStudentsByNameOrMail(name, email);
+    }
+
+    @GetMapping("/allWithPagination")
+    public Page<Student> getAllWithPagination(@RequestParam int pageNo, @RequestParam int pageSize){
+        return studentService.getAllWithPagination(pageNo, pageSize);
     }
 }
