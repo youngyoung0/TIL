@@ -1,9 +1,9 @@
 package com.study.mongo.controller;
 
 import com.study.mongo.entity.Student;
+import com.study.mongo.entity.type.Type;
 import com.study.mongo.service.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,7 +55,12 @@ public class StudentController {
     }
 
     @GetMapping("/allWithPagination")
-    public Page<Student> getAllWithPagination(@RequestParam int pageNo, @RequestParam int pageSize){
+    public List<Student> getAllWithPagination(@RequestParam int pageNo, @RequestParam int pageSize){
         return studentService.getAllWithPagination(pageNo, pageSize);
+    }
+
+    @GetMapping("/allWithSorting")
+    public List<Student> getAllWithSorting(@RequestParam Type type){
+        return studentService.getAllWithSorting(type);
     }
 }
