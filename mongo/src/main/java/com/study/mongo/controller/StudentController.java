@@ -42,4 +42,14 @@ public class StudentController {
     public List<Student> getStudentsByName(@PathVariable String name){
         return studentService.getStudentsByName(name);
     }
+
+    @GetMapping("/get/studentByNameAndMail")
+    public List<Student> getStudentByNameAndMail(@RequestParam String name, @RequestParam String email){
+        return studentService.getStudentsByNameAndMail(name, email);
+    }
+
+    @GetMapping("/get/studentByNameOrMail")
+    public List<Student> getStudentByNameOrMail(@RequestParam String name, @RequestParam String email){
+        return studentService.getStudentsByNameOrMail(name, email);
+    }
 }

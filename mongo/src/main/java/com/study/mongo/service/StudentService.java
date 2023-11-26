@@ -38,4 +38,12 @@ public class StudentService {
     public List<Student> getStudentsByName(String name) {
         return studentRepository.findByName(name);
     }
+
+    public List<Student> getStudentsByNameAndMail(String name, String email) {
+        return studentRepository.findByNameAndEmail(name, email);
+    }
+
+    public List<Student> getStudentsByNameOrMail(String name, String email) {
+        return studentRepository.findByNameOrEmail(name, email);
+    }
 }
