@@ -1,5 +1,6 @@
 package com.spirngbatch.demo.config;
 
+import com.spirngbatch.demo.listener.FirstJobListener;
 import com.spirngbatch.demo.service.SecondTasklet;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ public class SampleJob {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     private final SecondTasklet secondTasklet;
+    private final FirstJobListener firstJobListener;
 
     @Bean
     public Job firstJob() {
@@ -27,6 +29,7 @@ public class SampleJob {
                 .incrementer(new RunIdIncrementer())
                 .start(firstStep())
                 .next(secondStep())
+                .listener(firstJobListener)
                 .build();
     }
 

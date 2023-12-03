@@ -15,6 +15,7 @@ public class SecondTasklet implements Tasklet {
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) {
         try{
             log.info("This is second tasklet step");
+            log.info(chunkContext.getStepContext().getJobExecutionContext().toString());
             return RepeatStatus.FINISHED;
         } catch (Exception e){
             throw new RuntimeException("create issue :: " + e);
