@@ -1,5 +1,6 @@
 package com.spirngbatch.demo.config;
 
+import com.spirngbatch.demo.service.SecondTasklet;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 public class SampleJob {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
+    private final SecondTasklet secondTasklet;
 
     @Bean
     public Job firstJob() {
@@ -48,21 +50,8 @@ public class SampleJob {
     @Bean
     public Step secondStep() {
         return stepBuilderFactory.get("second Step")
-                .tasklet(firstTask())
+                .tasklet(secondTasklet)
                 .build();
-    }
-
-    private Tasklet secondTask(){
-
-        return (contribution, chunkContext) -> {
-            try{
-                log.info("This is second tasklet step");
-                return RepeatStatus.FINISHED;
-            } catch (Exception e){
-                throw new RuntimeException("create issue :: " + e);
-            }
-
-        };
     }
 
 }
